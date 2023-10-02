@@ -5,12 +5,12 @@ import java.util.List;
 
 public class ShoppingList {
 
-    public final List<Item> shoppingList = new ArrayList<>();
+    public final List<Item> listItems = new ArrayList<>();
 
     public double lowerValue() {
         double lowerValueInShoppingList = 0.0;
 
-        for (Item i : shoppingList) {
+        for (Item i : listItems) {
             if (i.getValue() < lowerValueInShoppingList || lowerValueInShoppingList == 0.0) {
                 lowerValueInShoppingList = i.getValue();
             }
@@ -22,7 +22,7 @@ public class ShoppingList {
     public double highestValue() {
         double highestValueInShoppingList = 0.0;
 
-        for (Item i : shoppingList) {
+        for (Item i : listItems) {
             if (i.getValue() > highestValueInShoppingList || highestValueInShoppingList == 0.0) {
                 highestValueInShoppingList = i.getValue();
             }

@@ -1,5 +1,6 @@
 package main.cap2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,57 +8,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RomanNumbersTest {
 
-    @Test
-    @DisplayName("Teste de números romanos individuais utilizando valor I")
-    public void shouldOneWithInsertI() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("I");
+    private RomanNumbers romanNumbers;
 
-        assertEquals(1, integerNumber);
+    @BeforeEach
+    public void init() {
+        this.romanNumbers = new RomanNumbers();
     }
 
     @Test
-    @DisplayName("Teste de números romanos individuais utilizando valor V")
-    public void shouldFiveWithInsertV() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("V");
-
-        assertEquals(5, integerNumber);
+    @DisplayName("Validar retorno para caracteres individuais utilizando conceito de classe de equivalência (quando um mesmo teste torna-se mais abrangente; menos específico)")
+    public void shouldCorrespondentValueForIndivualInsertCaracters() {
+        assertEquals(1, this.romanNumbers.translateRomanNumbers("I"));
+        assertEquals(5, this.romanNumbers.translateRomanNumbers("V"));
     }
 
     @Test
-    @DisplayName("Soma caracteres de mesmo tipo que estejam em duplicidade")
-    public void shouldTwentyWithDoubleX() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("XX");
-
-        assertEquals(20, integerNumber);
-    }
-
-    @Test
-    @DisplayName("Soma caracteres diferentes")
-    public void shouldFifteenWithXV() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("XV");
-
-        assertEquals(15, integerNumber);
+    @DisplayName("Soma de múltiplos caracteres utilizando conceito de classe de equivalência")
+    public void shouldCorrespondentValueForMultipleInsertsCaracters() {
+        assertEquals(20, this.romanNumbers.translateRomanNumbers("XX"));
+        assertEquals(15, this.romanNumbers.translateRomanNumbers("XV"));
     }
 
     @Test
     @DisplayName("Soma caracteres diferentes e subtrai quando necessário")
-    public void shouldNineWithIX() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("IX");
-
-        assertEquals(9, integerNumber);
+    public void shouldCorrespondentValueForArithmeticExpression() {
+        assertEquals(9, this.romanNumbers.translateRomanNumbers("IX"));
+        assertEquals(14, this.romanNumbers.translateRomanNumbers("XIV"));
     }
 
     @Test
-    @DisplayName("Soma de caracteres diferentes e repetidos")
-    public void shouldFiftyEightWithLVIII() {
-        RomanNumbers romanNumbers = new RomanNumbers();
-        int integerNumber = romanNumbers.translateRomanNumbers("LVIII");
-
-        assertEquals(58, integerNumber);
+    @DisplayName("Soma de diferentes inserts com múltiplos caracteres")
+    public void shouldCorrespondetValueForMultiplesInserts() {
+        assertEquals(19, romanNumbers.translateRomanNumbers("XIX"));
+        assertEquals(36, romanNumbers.translateRomanNumbers("XXXVI"));
+        assertEquals(58, romanNumbers.translateRomanNumbers("LVIII"));
     }
 }
